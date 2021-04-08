@@ -9,4 +9,4 @@ After the file is uploaded, click Continue and a results .csv will be downloaded
 If any of the paths in the .csv were invalid, the corresponding row in the results will have the label 'error'.
 
 ## Dependencies
-The app hits the [gov.uk Content API](https://content-api.publishing.service.gov.uk/) which is open and unauthenticated, and can also be used in a browser, eg - (https://www.gov.uk/api/content/take-pet-abroad)
+The app hits the [gov.uk Content API](https://content-api.publishing.service.gov.uk/) which is open and unauthenticated, and can also be used in a browser, eg - (https://www.gov.uk/api/content/bring-pet-to-great-britain)
