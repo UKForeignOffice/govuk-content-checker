@@ -23,6 +23,7 @@ router.get('/results', async (req, res, next) => {
     const data = fs.readFileSync(`./${UPLOADS_PATH}/${req.session.data.csv}`, 'utf8')
     const csv = await parseCsv(data)
     res.setHeader('Content-Type', 'text/csv');
+    res.attachment('url-results.csv')
     res.send(csv);
   } else {
     res.redirect('/error-csv')
