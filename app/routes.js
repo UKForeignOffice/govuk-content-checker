@@ -20,11 +20,16 @@ router.post(UPLOADS_PATH, upload.single('csv'), (req, res, next) => {
 
 router.get('/results', async (req, res, next) => {
   if (req.session.data.csv) {
-    const data = fs.readFileSync(`./${UPLOADS_PATH}/${req.session.data.csv}`, 'utf8')
-    const csv = await parseCsv(data)
-    res.setHeader('Content-Type', 'text/csv');
-    res.attachment('url-results.csv')
-    res.send(csv);
+    try {
+      const data = fs.readFileSync(`./${UPLOADS_PATH}/${req.session.data.csv}`, 'utf8')
+      const csv = await parseCsv(data)
+      res.setHeader('Content-Type', 'text/csv');
+      res.attachment('url-results.csv')
+      res.send(csv);
+    } catch (err) {
+      console.error(err);
+      res.redirect(`/error?message=${err.message}`)
+    }
   } else {
     res.redirect('/error-csv')
   }
