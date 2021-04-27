@@ -20,11 +20,15 @@ module.exports = async csv => {
     })
   )
   return Papa.unparse(
-    results.map(result => ({
-      path: result.value.base_path,
-      title: result.value.error ? 'ERROR' : result.value.title,
-      updated_at: result.value.error ? '' : formatDate(new Date(result.value.updated_at), 'dd/MM/yyyy HH:mm'),
-      content_api_url: `https://www.gov.uk/api/content${result.value.base_path}`
-    }))
+    results.map(result => {
+      const { base_path, details, error, title, updated_at } = result.value;
+      return {
+        path: base_path,
+        country: details && details.country ? details.country.name : '',
+        title: error ? 'ERROR' : title,
+        updated_at: error ? '' : formatDate(new Date(updated_at), 'dd/MM/yyyy HH:mm'),
+        content_api_url: `https://www.gov.uk/api/content${base_path}`
+      }
+    })
   )
 }
